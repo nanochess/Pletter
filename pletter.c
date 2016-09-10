@@ -388,7 +388,7 @@ int getlen(struct pakdata *p, unsigned int mode)
       cc = 9 + varcost[j - 1] + p[i + j].cost;
       if (cc < kc) {
         kc = cc;
-        kmode = 1;  /* Offset corto */
+        kmode = 1;  /* Short offset */
         kl = j;
       }
       --j;
@@ -404,7 +404,7 @@ int getlen(struct pakdata *p, unsigned int mode)
       cc = ccc + varcost[j - 1] + p[i + j].cost;
       if (cc < kc) {
         kc = cc;
-        kmode = 2;  /* Offset largo */
+        kmode = 2;  /* Long offset */
         kl = j;
       }
       --j;
@@ -439,7 +439,7 @@ void save(struct pakdata *p, unsigned int mode)
         adddata(d[i]);
         ++i;
         break;
-      case 1:  /* Offset corto */
+      case 1:  /* Short offset */
         add1();
         addvar(p[i].mlen - 1);
         j = m[i].cpos[0] - 1;
@@ -448,7 +448,7 @@ void save(struct pakdata *p, unsigned int mode)
         adddata(j);
         i += p[i].mlen;
         break;
-      case 2:  /* Offset largo */
+      case 2:  /* Long offset */
         add1();
         addvar(p[i].mlen - 1);
         j = m[i].cpos[mode] - 1;
